@@ -1,3 +1,4 @@
+require('dotenv').config();
 /**
  * 👋 Hey there!
  * This file is the starting point for your new WordPress/Gatsby site! 🚀
@@ -28,7 +29,7 @@ module.exports = {
         // the only required plugin option for WordPress is the GraphQL url.
         url:
           process.env.WPGRAPHQL_URL ||
-          `https://wpgatsbydemo.wpengine.com/graphql`,
+          `http://gatsbyjs-jamstack-test.test/wp/graphql`,
       },
     },
 
@@ -44,6 +45,20 @@ module.exports = {
         name: `assets`,
         path: `${__dirname}/content/assets`,
       },
+    },
+
+    /**
+     * Allow us to use cloudinary
+     */
+    {
+      resolve: `gatsby-source-cloudinary`,
+      options: {
+        cloudName: process.env.CLOUDINARY_CLOUD_NAME,
+        apiKey: process.env.CLOUDINARY_API_KEY,
+        apiSecret: process.env.CLOUDINARY_API_SECRET,
+        resourceType: `image`,
+        prefix: `gatsby-source-cloudinary/`
+      }
     },
 
     /**
